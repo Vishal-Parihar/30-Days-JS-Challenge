@@ -1,0 +1,95 @@
+<!-- 
+Activity 1: Selecting and Manipulating Elements
+• Task 1: Select an HTML element by its ID and change its text content.
+• Task 2: Select an HTML element by its class and change its background color.
+Activity 2: Creating and Appending Elements
+• Task 3: Create a new div element with some text content and append it to the body. • Task 4: Create a new li element and add it to an existing ul list.
+Activity 3: Removing Elements
+• Task 5: Select an HTML element and remove it from the DOM.
+• Task 6: Remove the last child of a specific HTML element.
+Activity 4: Modifying Attributes and Classes
+• Task 7: Select an HTML element and change one of its attributes (e.g., src of an img tag). • Task 8: Add and remove a CSS class to/from an HTML element.
+Activity 5: Event Handling
+• Task 9: Add a click event listener to a button that changes the text content of a paragraph. • Task 10: Add a mouseover event listener to an element that changes its border color.-->
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        #styles{
+            background-color: black;
+            color:white;
+        }
+        .myelement{
+            height: 50px;
+            width: 50px;
+            border: 2px solid black;
+        }
+       
+    </style>
+
+</head>
+<body style="background-color: darkcyan;">
+    <div id="text">I am Vishal Parihar</div>
+    <div class="myinfo">I am 20 years old</div>
+    <ul id="lang">
+    <li>Javascript</li>
+    <li>python</li>
+    </ul>
+    <img id="myimg" src="https://unsplash.com/photos/a-red-and-white-boat-in-the-water-U2iiXRpYwHw" width="400px" alt="mountain">
+
+    <p id="mypara">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ex incidunt doloribus animi itaque esse rerum delectus voluptas ut quasi!</p>
+   
+    <button class="mybtn">click</button>
+    <p id="para2">Lorem ipsum dolor sit amet.</p>
+
+    <div class="myelement">hover here</div>
+    
+</body>
+<script>
+    // task1
+    document.getElementById('text').innerHTML = "I am chai and you are code"
+
+    //task2
+    document.querySelector('.myinfo').innerHTML ="I am a third year CSE student"
+    
+    //task3
+    const newdiv = document.createElement('li')
+   newdiv.textContent = 'Hello Javascript';
+    document.body.appendChild(newdiv)
+    
+    //task4
+   const newli = document.createElement('newli')
+   newli.textContent = 'Django'
+   document.getElementById('lang').appendChild(newli)
+
+   //task5
+   const removelang = document.querySelector("li:last-child")
+   removelang.remove()
+
+   //task6
+   const removeMe = document.getElementById('lang')
+   removeMe.remove(removeMe.lastChild)
+
+   //task 7
+   document.getElementById('myimg').setAttribute("src","https://images.unsplash.com/photo-1721157549738-b0fd8d1a1e9d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D width='400px")
+
+   //task8
+   const paragraph = document.getElementById('mypara')
+   paragraph.classList.add("styles")
+   paragraph.classList.remove('styles')
+
+   //task9
+   document.querySelector('.mybtn').addEventListener('click',function(){
+    document.querySelector('#para2').textContent= " I love tea but chai is emotion";
+   });
+
+   //task10
+   document.querySelector('.myelement').addEventListener('mouseover',function(e) {
+    e.target.style.borderColor ="red"
+   })
+
+</script>
+</html>
