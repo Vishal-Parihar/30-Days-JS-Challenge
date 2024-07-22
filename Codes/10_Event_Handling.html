@@ -1,0 +1,138 @@
+<!-- Activity 1: Basic Event Handling
+• Task 1: Add a click event listener to a button that changes the text content of a paragraph.
+• Task 2: Add a double-click event listener to an image that toggles its visibility.
+Activity 2: Mouse Events
+• Task 3: Add a mouseover event listener to an element that changes its background color.
+• Task 4: Add a mouseout event listener to an element that resets its background color.
+Activity 3: Keyboard Events
+• Task 5: Add a keydown event listener to an input field that logs the key pressed to the console.
+• Task 6: Add a keyup event listener to an input field that displays the current value in a paragraph.
+Activity 4: Form Events
+• Task 7: Add a submit event listener to a form that prevents the default submission and logs the form data to the console. • Task 8: Add a change event listener to a select dropdown that displays the selected value in a paragraph.
+Activity 5: Event Delegation
+• Task 9: Add a click event listener to a list that logs the text content of the clicked list item using event delegation.
+• Task 10: Add an event listener to a parent element that listens for events from dynamically added child elements. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Handeling</title>
+    <style>
+      * {
+        margin: 5px;
+        padding: 0;
+      }
+      .toggleMe {
+        margin: 20px 5px;
+      }
+    </style>
+  </head>
+  <body style="background-color: #212121; color: white">
+    <button class="mybtn">Click</button>
+    <p class="para">
+      I am first paragraph. Lorem, ipsum dolor sit amet consectetur adipisicing
+      elit. Amet, totam!
+    </p>
+    <img
+      src="https://images.unsplash.com/photo-1721406769891-f2ba651401d9?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="chai"
+      class="toggleMe"
+      width="400px"
+    />
+    <div class="changeBG">Hi check me, I can change colour</div>
+    <div class="resetBg">Hi please reset my background color</div>
+
+    <input type="text" name="typeme" id="inputHere">
+
+    <p id="inputDisplay"></p>
+
+    <form class="data">
+        <input type="text" name="username" placeholder="Username">
+        <button class="btn">Submit</button>
+        <br>
+        <select id="dropdown">
+            <option value="chai"></option>
+            <option value="coffee"></option>
+            <option value="mocha"></option>
+        </select>
+
+        <p id="selectVal"></p>
+
+        <ul id="listItem">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3<li>
+        </ul>
+    </form>
+
+    <div class="parent">
+        <button id="addbtn">Adds Child</button>
+    </div>
+  </body>
+  <script>
+    //task1
+    const btn = document.querySelector(".mybtn");
+    const paragraph = document.querySelector(".para");
+
+    btn.addEventListener("click", function () {
+      paragraph.textContent = "Changed the paragraph. Thank you!";
+    });
+
+    //task2
+    const image = document.querySelector(".toggleMe");
+    image.addEventListener("dblclick", function () {
+        image.style.display = image.style.display === 'none' ? 'block' : 'none';
+    });
+
+    //task3
+    document.querySelector('.changeBG').addEventListener('mouseover',function(e){
+        e.target.style.backgroundColor ="red"
+    })
+
+    //task4
+    document.querySelector('.resetBg').addEventListener('mouseout',function(e){
+        e.target.style.backgroundColor ="brown"
+    })
+
+    //task5
+    document.querySelector('#inputHere').addEventListener('keydown', (e) => {
+    console.log('Key pressed:', e.key);
+});
+
+    //task6
+    document.querySelector('#inputHere').addEventListener('keyup', (event) => {
+    document.getElementById('inputDisplay').textContent = event.target.value;
+});
+
+   //task7
+   document.querySelector('.data').addEventListener('submit',function(e){
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const formObj = Object.fromEntries(formData.entries())
+    console.log('Form Data:',formObj);
+   })
+
+   //task8
+   document.getElementById('dropdown').addEventListener('change',function(e){
+    document.getElementById('selectVal').textContent = `Selected: ${e.target.value}`
+   })
+
+   //task9
+   document.querySelector('#listItem').addEventListener('click',(e)=>{
+    if(e.target.tagName === 'LI'){
+        console.log('list item checked:',
+        e.target.textContent);
+    }
+   })
+
+   //task10
+   document.querySelector('.parent').addEventListener('click',(e)=>{
+    if(e.target && e.target.id ==='addbtn'){
+        const newButton = document.createElement('button')
+        newButton.textContent = 'child button'
+        document.querySelector('.parent').appendChild(newButton)
+    }
+   })
+  </script>
+</html>
